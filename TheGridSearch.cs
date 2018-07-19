@@ -85,7 +85,7 @@ namespace Practice
                 }
             }
 
-
+            return lastOrder.SelectMany(x => x.Occurs).GroupBy(x => x).Select(s => s.Count()).Any(x => x == 3)? "YES" : "NO";
             return allHaveSameValue?"YES":"NO";
         }
 
