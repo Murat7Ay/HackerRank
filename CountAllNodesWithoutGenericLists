@@ -1,0 +1,57 @@
+ public class Node
+    {
+        public Node Left { get; set; }
+        public Node Right { get; set; }
+
+        public int Counts
+        {
+            get
+            {
+                var arr = new Node[] { this };
+                var count = 0;
+                var temp = new Node[0];
+
+                while (arr.Length != 0)
+                {
+                    var master = arr[0];
+                    if (master.Left != null)
+                    {
+                        count++;
+                        int arrLength = arr.Length;
+                        Array.Resize(ref arr, arrLength + 1);
+                        arr[arrLength] = master.Left;
+                    }
+
+                    if (master.Right != null)
+                    {
+                        count++;
+                        int arrLength = arr.Length;
+                        Array.Resize(ref arr, arrLength + 1);
+                        arr[arrLength] = master.Right;
+                    }
+                    Array.Resize(ref temp, arr.Length-1);
+                    Array.Copy(arr, 1, temp, 0, arr.Length-1);
+                    arr = temp;
+                }
+                return count;
+            }
+        }
+    }
+    public class NodeValue
+    {
+        public int Value { get; set; }
+        public NodeValue NextNode { get; set; }
+
+        public int Sum()
+        {
+            int result = 0;
+            var node = this;
+            while (node.NextNode != null)
+            {
+                result += node.Value;
+                node = node.NextNode;
+            }
+
+            return result;
+        }
+    }
